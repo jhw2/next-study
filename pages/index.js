@@ -35,3 +35,15 @@ export default function Home() {
     </div>
   )
 }
+
+/*
+빌드 시 딱 한번 api 요청, 그 후 정적 파일 생성
+export async function getStaticProps(){
+  const { data } = await axios.get('https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
+  return {
+    props: {
+      lists: data
+    }
+  }
+}
+*/
