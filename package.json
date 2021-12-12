@@ -8,9 +8,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react-cookies": "^0.1.0",
     "axios": "^0.24.0",
     "next": "12.0.3",
+    "next-cookie": "^2.8.0",
+    "next-cookies": "^2.0.3",
     "react": "17.0.2",
+    "react-cookie": "^4.1.1",
     "react-dom": "17.0.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.4"
