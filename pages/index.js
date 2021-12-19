@@ -4,6 +4,7 @@ import { Header, Loader } from 'semantic-ui-react';
 import ItemList from '../src/component/ItemList';
 import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
+import { firestore } from '../firebase';
 
 export default function Home() {
   const [lists, setList] = useState([]);

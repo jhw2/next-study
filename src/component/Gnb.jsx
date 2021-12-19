@@ -17,12 +17,14 @@ export default function Gnb() {
           active={activeItem === 'home'}
           link='/'
           onClick={goLink}
+          key='home'
         />
         <Menu.Item
           name='about'
           active={activeItem === 'about'}
           link='/about'
           onClick={goLink}
+          key='about'
         />
       </Menu>
   )
