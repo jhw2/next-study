@@ -33,3 +33,4 @@ footer{margin-top: auto;padding: 10px 0;background-color: #fff;color: #666;font-
 
 table{border: 1px solid #ccc;table-layout: fixed;width: 100%;border-collapse: collapse;}
 table td{border: 1px solid #ccc;}
+table td{}

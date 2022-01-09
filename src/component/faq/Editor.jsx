@@ -17,9 +17,9 @@ export default memo(function Editor({onChangeEditor, defaultValue}) {
 		onChangeEditor(tag);
 	}
 	return (
-		<>
+		<div className="editor-wrap">
 			<ForwardRefEditor ref={quillRef} value={value} onChange={onChange}/>
-		</>
+		</div>
 		
 	);
 });
