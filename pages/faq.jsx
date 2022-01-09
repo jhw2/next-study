@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { db } from '../firebase'; 
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { getAuth, signInWithPopup, GoogleAuthProvider  } from "firebase/auth";
+import Editor from '../src/component/faq/Editor';
+// import Test from '../src/component/faq/Test';
 
 export default function faq() {
     const formRef = useRef();
@@ -13,6 +15,11 @@ export default function faq() {
         e.preventDefault()
         const title = titleRef.current.value;
         const contents = contRef.current.value;
+
+        const ISSERVER = typeof window === "undefined";
+        if(!ISSERVER) {
+            console.log(localStorage.moviePosters);
+        }
 
         try {
             const docRef = await addDoc(collection(db, "faq"), {title, contents});
@@ -38,37 +45,40 @@ export default function faq() {
         const user = auth.currentUser;
         const provider = new GoogleAuthProvider();
         
-        console.log(user)
-        signInWithPopup(auth, provider)
-        .then((result) => {
-            // This gives you a Google Access Token. You can use it to access Google APIs.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+        // signInWithPopup(auth, provider)
+        // .then((result) => {
+        //     // This gives you a Google Access Token. You can use it to access Google APIs.
+        //     const credential = GoogleAuthProvider.credentialFromResult(result);
+        //     const token = credential.accessToken;
 
-            // The signed-in user info.
-            const user = result.user;
-            console.log(user)
-        }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            console.log(errorMessage)
-            // ...
-        });
+        //     // The signed-in user info.
+        //     const user = result.user;
+        //     console.log(user)
+        // }).catch((error) => {
+        //     // Handle Errors here.
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+        //     // The email of the user's account used.
+        //     const email = error.email;
+        //     // The AuthCredential type that was used.
+        //     const credential = GoogleAuthProvider.credentialFromError(error);
+        //     console.log(errorMessage)
+        //     // ...
+        // });
 
 
 
         setFaqList(await getData());
     },[]);
+    const onChangeEditor = (tag)=>{
+       // console.log(tag)
+    }
 
     return (
         <form onSubmit={inSertData} ref={formRef}>
             <p><input type="text" ref={titleRef} required/></p>
             <p><textarea ref={contRef} required></textarea></p>
+            <Editor defaultValue='' onChangeEditor={onChangeEditor}  />
             <input type='submit' value="등록" />
 
             {faqList.map(item=>{
