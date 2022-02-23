@@ -5,8 +5,8 @@ const ImageResize = typeof window === 'object' ? require('quill-image-resize').d
 
 export default function QillWrapper({ quillRef, ...props }) {
 	const [tableFocus, setTableFocus] = useState(false);
-	const editor = quillRef.current?.getEditor();
-	const tableModule = editor?.getModule('table');
+	let editor = quillRef.current?.getEditor();
+	let tableModule = editor?.getModule('table');
 	window.Quill = Quill;
 	Quill.register('modules/ImageResize', ImageResize);
     const modules = useMemo(()=>{
@@ -42,6 +42,8 @@ export default function QillWrapper({ quillRef, ...props }) {
 	},[]);
 	const addTable = useMemo((e)=>(e)=>{
 		e.preventDefault();
+		editor = quillRef.current?.getEditor();
+		tableModule = editor?.getModule('table');
 		editor.focus();
 		tableModule.insertTable(1,2);
 	},[editor, tableModule])
