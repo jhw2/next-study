@@ -5,21 +5,12 @@ import ItemList from '../src/component/ItemList';
 import styles from '../styles/Home.module.css';
 import { useEffect, useState } from 'react';
 import { firestore } from '../firebase';
+import { useQuery } from "react-query";
 
 export default function Home() {
-  const [lists, setList] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-
-  const getDataList = ()=>{
-    axios.get('https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline').then(({data}) => {
-      setList(data);
-      setLoading(false);
-    });
-  }
-
-  useEffect(()=>{
-    getDataList();
-  },[]);
+  const { isLoading, error, data: lists } = useQuery("posts", () => {
+    return axios.get('https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline');
+  });
 
   return (
     <div>
@@ -27,10 +18,10 @@ export default function Home() {
         {!isLoading &&
           <>
             <Header as='h2'>신상품</Header>
-            <ItemList lists={lists.slice(0,8)} />
+            <ItemList lists={lists.data.slice(0,8)} />
     
             <Header as='h2'>일반상품</Header>
-            <ItemList lists={lists.slice(8)} />
+            <ItemList lists={lists.data.slice(8)} />
           </>
         }
     </div>
