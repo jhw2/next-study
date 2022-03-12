@@ -7,7 +7,7 @@ export default function Gnb() {
   const activeItem = router.pathname === '/' ? 'home' : router.pathname.replace('/','');
   
   const goLink = (e, data)=>{
-      const link = data.link;
+      const link = data.url;
       router.push(link);
   }
   return (
@@ -15,14 +15,14 @@ export default function Gnb() {
         <Menu.Item
           name='home'
           active={activeItem === 'home'}
-          link='/'
+          url='/'
           onClick={goLink}
           key='home'
         />
         <Menu.Item
           name='about'
           active={activeItem === 'about'}
-          link='/about'
+          url='/about'
           onClick={goLink}
           key='about'
         />
